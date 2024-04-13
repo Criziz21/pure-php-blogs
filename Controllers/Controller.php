@@ -27,7 +27,7 @@ class Controller
     }
     return false;
   }
-  protected function render($layoutAndData)
+  protected function render_v1($layoutAndData)
   {
     $prepareLayout = (!self::str_ends_with_arr($layoutAndData[0], ['.html', '.php', '.htmx', '.template'])) ? self::prepareLayout($layoutAndData[0]) : $layoutAndData[0];
     if (isset($layoutAndData[1])) {
@@ -49,17 +49,17 @@ class Controller
     return $prepareLayout;
   }
 
-  protected function renderAll($layoutAndData)
+  protected function render($layoutAndData)
   {
 
-    if (count($layoutAndData[1]) > 1) { // check is not ready
+    if (isset($layoutAndData[1][0])) { // check is not ready
       $mainLayout = "";
       for ($i = 0; $i < count($layoutAndData[1]); $i++) {
         $prepareLayout = (!self::str_ends_with_arr($layoutAndData[0], ['.html', '.php', '.htmx', '.template'])) ? self::prepareLayout($layoutAndData[0]) : $layoutAndData[0];
-        if (isset($layoutAndData[1])) {
-          foreach ($layoutAndData[1] as $key => $value) {
-            $prepareLayout = str_replace("{{ " . $key . " }}", $value, $prepareLayout);
-          }
+        // if (isset($layoutAndData[1])) { // for what ?
+        foreach ($layoutAndData[1][$i] as $key => $value) {
+          $prepareLayout = str_replace("{{ " . $key . " }}", $value, $prepareLayout);
+        // }
         }
         $mainLayout = $mainLayout . $prepareLayout;
       }

@@ -14,6 +14,7 @@ function my_psr4_autoloader($class) {
 }
 spl_autoload_register( __NAMESPACE__ . '\my_psr4_autoloader' );
 
+
 class toolbar {
     static function dump($var) {
         echo "<pre>";
