@@ -2,7 +2,7 @@
 
 namespace MyApp;
 
-function my_psr4_autoloader($class) {
+function my_psr4_autoloader($class) { // in order to collect core files in one place we change the autoload
     $class_path = str_replace('\\', '/', $class);
     $class_path = str_replace("MyApp/", '', $class_path);
     $file =  __DIR__ . '/' . $class_path . '.php';
@@ -24,3 +24,4 @@ class toolbar {
 }
 
 require_once("./Core/routes.php");
+

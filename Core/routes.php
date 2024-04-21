@@ -1,12 +1,17 @@
 <?php
 use MyApp\Controllers\BlogController;
+use MyApp\Controllers\Controller;
 use MyApp\Core\FileManager;
 use MyApp\Core\Route;
 use MyApp\Controllers\BasicController;
+Route::get("/assets/{asset}", [Controller::class, "assets"]);
+
+
 
 
 Route::get("/test/", [BlogController::class, "index"]);
-Route::get("/css/{css}", [BasicController::class, "css"]);
+
+// Route::get("/css/{css}", [BasicController::class, "css"]);
 
 // Route::get("/test/", [BlogController::class,"index"]);
 
@@ -18,4 +23,13 @@ Route::get("/css/{css}", [BasicController::class, "css"]);
 //     FileManager::render("index.html");
 // });
 // echo "dsaf";
+
+
+
+
+
+
+
+
+
 Route::execute();

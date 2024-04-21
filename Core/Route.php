@@ -26,15 +26,15 @@ class Route
         }
         for ($i = 0; $i < count($trackSplits); $i++) {
             if (str_contains($trackSplits[$i], "{")) {
-                var_dump($trackSplits[$i]);
-                $_REQUEST[trim($trackSplits[$i], "{}")] = $uriSplits[$i];
+                // var_dump($trackSplits[$i]); // error all time was this line
+                $_REQUEST[trim($trackSplits[$i], "{}")] = $uriSplits[$i]; 
                 continue;
             }
             if ($trackSplits[$i] != $uriSplits[$i]) {
                 return false;
             }
         }
-        return true;
+        return true;   
     }
     static function execute()
     {

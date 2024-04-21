@@ -7,6 +7,42 @@ use MyApp\toolbar;
 
 class Controller
 {
+  public function assets() {
+    $mime_types = [
+        'txt' => 'text/plain',
+        'html' => 'text/html',
+        'htm' => 'text/html',
+        'php' => 'text/php',
+        'jpg' => 'image/jpeg',
+        'jpeg' => 'image/jpeg',
+        'png' => 'image/png',
+        'gif' => 'image/gif',
+        'svg' => 'image/svg+xml',
+        'css' => 'text/css',
+        'js' => 'text/javascript',
+    ];
+    
+    $file = $_REQUEST["asset"];
+    $mime = "images";
+    $path = "other";
+    foreach( $mime_types as $mime_type => $value ) {
+        if(str_ends_with($file, $mime_type)) {
+            $mime = $value;
+            break;
+        }
+    }
+    if(str_ends_with($mime,  'css')) {
+        $path = "css";
+    }
+    elseif(str_ends_with($mime,  'js')) {
+        $path = "js";
+    }
+    elseif(str_starts_with($mime,  'image')) {
+        $path = "images";
+    }
+    header("content-type: " . $mime); // to show in sources tab
+    readfile("./assets/" . $path . "/" . $file);
+}
   protected function prepareLayout_v1($filename)
   {
     $new_layout = FileManager::readFile($filename);
@@ -67,7 +103,7 @@ class Controller
       foreach ($layoutAndData[1] as $arr) {
         // toolbar::dump($arr);
 
-        $new_layout = FileManager::readFile($layoutAndData[0]);
+        $new_layout = FileManager::readFile("./templates/" . $layoutAndData[0]);
         foreach ($arr as $key => $value) {
           $new_layout = str_replace("{{ " . $key . " }}", $value, $new_layout);
         }

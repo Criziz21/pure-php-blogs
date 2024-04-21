@@ -72,3 +72,13 @@ img {
   text-align: center;
   font-size: 20px;
 }
+
+.newc {
+  width: 100px;
+  height: 100px;
+}
+
+.newc > img {
+  width: 100px;
+  height: 100px;
+}
